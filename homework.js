@@ -15,8 +15,15 @@ function createUser(data) { //thêm user vào DB
 function UpdateUser(id, data) { //thêm đánh giá của người dùng về phim vào DB
     firebase.firestore().collection('ReviewFilms').doc(id).update(data);
 }
-UpdateUser('Aip2yiZlhj8QbC3ahtES', {comment: 'Phim rất hay, xem rất nét'});
+UpdateUser('Aip2yiZlhj8QbC3ahtES', {comment: 'Phim rất hay'});
 UpdateUser('TbCmEhZYxFoAmwzEaoyn', {comment: 'Phim Ong Bak trên mình tìm lâu lắm rồi, giờ mới tìm thấy để xem được'});
 UpdateUser('gPmVSNr6Iii4u2ZaPl0Z', {comment: 'Phim 2012 nhìn chiến quá bạn ơi'});
 
-
+async function ReadALL() {  
+    var result = await firebase.firestore().collection('ReviewFilms').get();
+    console.log (result);
+    for (var document of result.docs) {
+        console.log (document.id, document.data());
+    }
+}
+ReadALL();
